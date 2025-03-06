@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projet-cloud-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: projet-cloud-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: projet-cloud-app
+    spec:
+      containers:
+      - name: projet-cloud-app
+        image: vharaphis/projet-cloud-app
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projet-cloud-app-service
+spec:
+  type: NodePort
+  selector:
+    app: projet-cloud-app
+  ports:
+    - name: react-app
+      port: 3000
+      targetPort: 3000
