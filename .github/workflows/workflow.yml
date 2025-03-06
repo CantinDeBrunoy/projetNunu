@@ -17,12 +17,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-
-      - name: Initialize project
-        run: cd front && npm i && npm start
+          cache-dependency-path: front/package-lock.json
 
       - name: Install dependencies
-        run: cd front && npm install
+        run: cd front && npm ci
 
       - name: Build React app
         run: cd front && npm run build
@@ -38,12 +36,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-
-      - name: Initialize project
-        run: cd front && npm i && npm start
+          cache-dependency-path: back/package-lock.json
 
       - name: Install dependencies
-        run: cd back && npm install
+        run: cd back && npm ci
 
   docker:
     runs-on: ubuntu-latest
