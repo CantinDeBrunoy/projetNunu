@@ -69,16 +69,21 @@ jobs:
     needs: docker
     steps:
       - uses: actions/checkout@v3
-
+  
       - name: Start Kubernetes minikube
         uses: medyagh/setup-minikube@master
-
-      - name: Deploy to Kubernetes
+  
+      - name: Deploy front-end and back-end to Kubernetes
         run: |
           kubectl apply -f infra/projet-cloud-app-deployment.yml
           kubectl apply -f infra/projet-cloud-back-server.yml
-
+  
+      - name: Apply Ingress configuration
+        run: |
+          kubectl apply -f infra/projet-cloud-ingress.yml
+  
       - name: Check deployment
         run: |
           kubectl get pods
           kubectl get services
+          kubectl get ingress
