@@ -19,7 +19,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: cd front && npm install
+        run: cd front && npm install --package-lock-only
 
       - name: Build React app
         run: cd front && npm run build
@@ -37,7 +37,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: cd back && npm install
+        run: cd back && npm install --package-lock-only
 
   docker:
     runs-on: ubuntu-latest
