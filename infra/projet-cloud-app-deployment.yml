@@ -27,5 +27,5 @@ spec:
     app: projet-cloud-app
   ports:
     - name: react-app
-      port: 3000
+      port: 80
       targetPort: 3000
