@@ -54,23 +54,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set Docker username as environment variable
-        run: echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
-
-      - name: Install Docker Compose
+      - name: Build and push Docker images for front-end
         run: |
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          docker-compose --version  # Vérifie que Docker Compose est bien installé
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/projet-cloud-app:latest ./front
+          docker push ${{ secrets.DOCKER_USERNAME }}/projet-cloud-app:latest
 
-      - name: Build and push Docker images with Docker Compose
+      - name: Build and push Docker images for back-end
         run: |
-          docker-compose build
-          docker-compose push
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-
-
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/projet-cloud-back:latest ./back
+          docker push ${{ secrets.DOCKER_USERNAME }}/projet-cloud-back:latest
 
   kubernetes:
     runs-on: ubuntu-latest
