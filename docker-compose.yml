@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    build: 
-      context: .
-      dockerfile: back/Dockerfile
+    build: ./back
     ports:
       - "5000:5000"
     environment:
@@ -13,11 +11,9 @@ services:
       - app-network
 
   frontend:
-    build: 
-      context: .
-      dockerfile: front/Dockerfile
+    build: ./front
     ports:
-      - "80:80"
+      - "3000:3000"
     depends_on:
       - backend
     networks:
