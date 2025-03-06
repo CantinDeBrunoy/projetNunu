@@ -3,6 +3,7 @@ version: '3.8'
 services:
   backend:
     build: ./back
+    image: $DOCKER_USERNAME/projet-cloud-back:latest
     ports:
       - "5000:5000"
     environment:
@@ -12,6 +13,7 @@ services:
 
   frontend:
     build: ./front
+    image: $DOCKER_USERNAME/projet-cloud-app:latest
     ports:
       - "3000:3000"
     depends_on:

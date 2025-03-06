@@ -41,9 +41,9 @@ jobs:
       - name: Install dependencies
         run: cd back && npm ci
 
-  dockerize-front:
+  docker:
     runs-on: ubuntu-latest
-    needs: build-front
+    needs: [build-front, build-back]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -54,38 +54,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v4
-        with:
-          context: ./front
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/projet-cloud-app:latest
-
-  dockerize-back:
-    runs-on: ubuntu-latest
-    needs: build-back
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v4
-        with:
-          context: ./back
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/projet-cloud-back:latest
+      - name: Build and push Docker images with Docker Compose
+        run: |
+          docker compose build
+          docker compose push
 
   kubernetes:
     runs-on: ubuntu-latest
-    needs: [dockerize-front, dockerize-back]
+    needs: docker
     steps:
       - uses: actions/checkout@v3
 
