@@ -14,7 +14,6 @@ const Home = () => {
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
       setActiveColor(randomColor);
 
-      // Reset after 500ms to simulate light turning off
       setTimeout(() => setActiveColor(null), 500);
     }, 1000);
 
@@ -37,16 +36,6 @@ const Home = () => {
           }}>
             Se connecter
           </Link>
-          <Link to="/register" style={{ 
-            textDecoration: 'none',
-            padding: '10px 20px',
-            backgroundColor: '#28a745',
-            color: 'white',
-            borderRadius: '5px',
-            width:'100px'
-          }}>
-            S'inscrire
-        </Link>
         </div>
         <div className='simon'>
           <div className={`simon-green ${activeColor === 'simon-green' ? 'active' : ''}`}></div>

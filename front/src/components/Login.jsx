@@ -11,13 +11,18 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     const success = await login({ email, password });
     if (success) {
-      navigate('/dashboard');
+      navigate("/Game");
     } else {
-      setError('Identifiants invalides');
+      setError("Identifiants invalides");
     }
   };
+
+ 
+  
 
   return (
     <div
@@ -123,3 +128,4 @@ const Login = () => {
 };
 
 export default Login;
+
