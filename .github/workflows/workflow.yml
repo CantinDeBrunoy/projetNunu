@@ -18,6 +18,9 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      - name: Initialize project
+        run: cd front && npm i && npm start
+
       - name: Install dependencies
         run: cd front && npm install
 
@@ -35,6 +38,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+
+      - name: Initialize project
+        run: cd front && npm i && npm start
 
       - name: Install dependencies
         run: cd back && npm install
