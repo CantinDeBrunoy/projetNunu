@@ -7,9 +7,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://projet-cloud-app.local",
+    origin: ["http://projet-cloud-app.local", "http://projet-cloud-back.local"],
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
+    credentials: true,
   })
 );
 
