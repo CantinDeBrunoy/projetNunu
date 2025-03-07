@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 
-const API_URL = `http://projet-cloud-back-service:5000`;
+const API_URL = `http://projet-cloud-back.local`;
 
 const AuthContext = createContext(null);
 
