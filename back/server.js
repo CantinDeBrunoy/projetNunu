@@ -36,7 +36,7 @@ app.post("/login", (req, res) => {
   res.status(401).json({ error: "Identifiants invalides" });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () =>
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`)
 );
