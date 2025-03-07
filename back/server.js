@@ -4,12 +4,24 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://projet-cloud-app.local",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
+
 app.use(express.json());
 
 const SECRET_KEY = "supersecretkey";
 const VALID_EMAIL = "user@example.com";
 const VALID_PASSWORD = "pswd";
+
+app.get("/", (req, res) => {
+  res.send("Projet Cloud - Back-end is running !");
+});
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
