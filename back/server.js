@@ -1,18 +1,8 @@
 const express = require("express");
-const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const app = express();
-
-app.use(
-  cors({
-    origin: ["http://projet-cloud-app.local", "http://projet-cloud-back.local"],
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true,
-  })
-);
 
 app.use(express.json());
 
